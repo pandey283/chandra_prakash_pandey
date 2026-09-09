@@ -11,5 +11,8 @@
 // Layout primitives
 @use 'layout';
 
-// Utility classes
+// Component styles (add partials to components/_index.scss)
+@use 'components';
+
+// Utility classes (last — highest specificity intentional)
 @use 'utilities';
