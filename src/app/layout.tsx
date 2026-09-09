@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "@/styles/main.scss";
+import { SITE } from "@/constants";
 
-// Next.js 16: use .className directly on the element for clean application.
-// .variable mode is for when you need the CSS custom property in Tailwind @theme —
-// we expose it as --font-inter in globals.css @theme so we use variable mode here.
+// Next.js 16: .variable mode injects --font-inter as a CSS custom property on <html>.
+// Tailwind @theme consumes it via --font-sans: var(--font-inter).
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -13,14 +13,23 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE.url),
   title: {
-    default: "Chandra Prakash Pandey",
-    template: "%s | Chandra Prakash Pandey",
+    default: SITE.name,
+    template: `%s | ${SITE.name}`,
   },
-  description: "Creative Technologist · Frontend Engineer · UI/UX Designer",
-  authors: [{ name: "Chandra Prakash Pandey" }],
-  keywords: ["frontend", "ui/ux", "nextjs", "react", "design systems"],
-  // Use typed object form per Next.js 16 Metadata API
+  description: SITE.description,
+  authors: [{ name: SITE.name }],
+  keywords: [
+    "frontend engineer",
+    "ui/ux designer",
+    "creative technologist",
+    "next.js",
+    "react",
+    "design systems",
+    "motion design",
+    "typescript",
+  ],
   robots: {
     index: true,
     follow: true,
@@ -34,9 +43,25 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
-    title: "Chandra Prakash Pandey",
-    description: "Creative Technologist · Frontend Engineer · UI/UX Designer",
+    locale: SITE.locale,
+    url: SITE.url,
+    siteName: SITE.name,
+    title: SITE.name,
+    description: SITE.description,
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: SITE.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: SITE.description,
+    images: ["/og-image.svg"],
   },
 };
 
