@@ -1,6 +1,4 @@
 // Abstracts barrel — import order matters
-// NOTE: _mixins.scss uses @use 'sass:math' internally, which is fine
-// since it's a standalone module; consumers @use this barrel with a namespace
 @forward 'functions';
 @forward 'variables';
 @forward 'mixins';
