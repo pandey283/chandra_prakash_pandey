@@ -1,0 +1,34 @@
+// ============================================================
+// ABSTRACTS / FUNCTIONS
+// Pure SCSS helper functions
+// ============================================================
+
+// --- Convert px to rem ---
+@function rem($px, $base: 16) {
+  @return #{$px / $base}rem;
+}
+
+// --- Convert px to em ---
+@function em($px, $base: 16) {
+  @return #{$px / $base}em;
+}
+
+// --- Clamp shorthand ---
+@function fluid($min, $preferred, $max) {
+  @return clamp(#{$min}, #{$preferred}, #{$max});
+}
+
+// --- Strip unit from value ---
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+// --- Shade: darken a color by mixing with black ---
+@function shade($color, $amount: 10%) {
+  @return mix(black, $color, $amount);
+}
+
+// --- Tint: lighten a color by mixing with white ---
+@function tint($color, $amount: 10%) {
+  @return mix(white, $color, $amount);
+}

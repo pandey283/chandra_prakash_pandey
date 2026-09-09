@@ -1,0 +1,125 @@
+// ============================================================
+// ABSTRACTS / MIXINS
+// Production-grade reusable SCSS mixins
+// ============================================================
+@use 'sass:math';
+@use 'variables' as *;
+
+// --- Responsive Breakpoints ---
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: #{$breakpoint-sm}) { @content; }
+  } @else if $breakpoint == md {
+    @media (min-width: #{$breakpoint-md}) { @content; }
+  } @else if $breakpoint == lg {
+    @media (min-width: #{$breakpoint-lg}) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: #{$breakpoint-xl}) { @content; }
+  } @else if $breakpoint == 2xl {
+    @media (min-width: #{$breakpoint-2xl}) { @content; }
+  }
+}
+
+// --- Fluid Typography (clamp-based) ---
+@mixin fluid-type($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
+  $slope: math.div($max-size - $min-size, $max-vw - $min-vw);
+  $intercept: $min-size - $slope * $min-vw;
+  font-size: clamp(#{$min-size}, #{$slope * 100}vw + #{$intercept}, #{$max-size});
+}
+
+// --- Truncate Text ---
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// --- Flex Utilities ---
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+// --- Absolute Cover ---
+@mixin cover {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// --- Smooth Transition ---
+@mixin transition($props: all, $duration: $transition-base) {
+  transition-property: #{$props};
+  transition-duration: $duration;
+  transition-timing-function: ease;
+}
+
+// --- Focus Ring (accessible) ---
+@mixin focus-ring($color: $color-brand-primary, $offset: 3px) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: $offset;
+    border-radius: $radius-sm;
+  }
+}
+
+// --- Glass Morphism ---
+@mixin glass($bg: rgba(255, 255, 255, 0.08), $blur: 12px) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+// --- Gradient Text ---
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+// --- SR-Only (screen reader accessible) ---
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// --- Smooth Scroll Container ---
+@mixin smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+// --- Container Query Mixin ---
+@mixin container-query($size) {
+  @container (min-width: #{$size}) { @content; }
+}
