@@ -1,0 +1,35 @@
+// ============================================================
+// UTILITIES
+// Single-purpose utility classes (supplement Tailwind)
+// ============================================================
+@use '../abstracts' as *;
+
+// --- Visually Hidden (a11y) ---
+.sr-only {
+  @include sr-only;
+}
+
+// --- Gradient Text ---
+.text-gradient-brand {
+  @include gradient-text(linear-gradient(135deg, $color-brand-primary, $color-brand-secondary));
+}
+
+.text-gradient-warm {
+  @include gradient-text(linear-gradient(135deg, #f97316, #ec4899));
+}
+
+// --- Glass Card ---
+.glass {
+  @include glass;
+  border-radius: $radius-xl;
+}
+
+// --- Smooth Transition Shorthand ---
+.transition-smooth {
+  @include transition(all, $transition-base);
+}
+
+// --- Focus visible reset ---
+:focus:not(:focus-visible) {
+  outline: none;
+}

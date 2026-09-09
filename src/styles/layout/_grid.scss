@@ -1,0 +1,34 @@
+// ============================================================
+// LAYOUT / GRID
+// Layout containers and grid primitives
+// ============================================================
+@use '../abstracts' as *;
+
+// --- Container ---
+.container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $space-4;
+
+  @include respond-to(sm)  { max-width: $breakpoint-sm; }
+  @include respond-to(md)  { max-width: $breakpoint-md; padding-inline: $space-6; }
+  @include respond-to(lg)  { max-width: $breakpoint-lg; padding-inline: $space-8; }
+  @include respond-to(xl)  { max-width: $breakpoint-xl; }
+  @include respond-to(2xl) { max-width: $breakpoint-2xl; }
+}
+
+// --- Section Wrapper ---
+.section {
+  padding-block: $space-20;
+
+  @include respond-to(lg) {
+    padding-block: $space-32;
+  }
+}
+
+// --- Auto Grid (responsive, no media queries needed) ---
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: $space-6;
+}

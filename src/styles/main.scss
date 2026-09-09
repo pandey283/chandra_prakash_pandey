@@ -1,0 +1,15 @@
+// ============================================================
+// MAIN SCSS ENTRY POINT
+// Import order: Base → Layout → Utilities
+// Abstracts (variables/mixins) are @use'd inside each partial.
+// Do NOT import Tailwind here — it lives in globals.css
+// ============================================================
+
+// Base styles
+@use 'base';
+
+// Layout primitives
+@use 'layout';
+
+// Utility classes
+@use 'utilities';
